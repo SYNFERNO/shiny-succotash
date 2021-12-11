@@ -5,31 +5,23 @@
 <body>
    <div class="container">
       <div class="col-sm-5">
-      <h2>Prediksi</h2>
+      <h2>Predict</h2>
          <form action="{{ url_for('tambah') }}" method="post">
             <div class="form-group">
-               <label>Bulan:</label>
-               <input type="text" name="bulan" class="form-control" placeholder="Masukan bulan" required />
-            </div>
-            <div class="form-group">
-               <label>Tahun:</label>
-               <input type="text" name="tahun" class="form-control" placeholder="Masukan tahun" required />
-            </div>
-            <div class="form-group">
                <label>Kecepatan Angin:</label>
-               <input type="text" name="angin" class="form-control" placeholder="Masukan kecepatan angin" required />
+               <input type="text" name="nama" class="form-control" placeholder="Masukan kecepatan angin" required />
             </div>
             <div class="form-group">
                <label>Curah Hujan:</label>
-               <input type="text" name="hujan" class="form-control" placeholder="Masukan curah hujan" required />
+               <input type="number" name="harga" class="form-control" placeholder="Masukan curah hujan" required />
             </div>
             <div class="form-group">
                <label>Temperatur:</label>
-               <input type="text" name="temperatur" class="form-control" placeholder="Masukan temperatur" required />
+               <input type="number" name="stok" class="form-control" placeholder="Masukan temperatur" required />
             </div>
             <div class="form-group">
                <label>Kelembaban:</label>
-               <input type="text" name="lembab" class="form-control" placeholder="Masukan Kelembaban" required />
+               <input type="number" name="stok" class="form-control" placeholder="Masukan Kelembaban" required />
             </div>
             <button type="submit" id="Submit" name="submit" class="btn btn-primary">Predict</button>
       </form>
