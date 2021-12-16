@@ -1,39 +1,67 @@
 <html>
+
 <head>
    <title>Data science</title>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></head>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
 <body>
    <div class="container">
       <div class="col-sm-5">
-      <h2>Prediksi</h2>
+         <h2>Prediksi</h2>
          <form action="{{ url_for('tambah') }}" method="post">
             <div class="form-group">
                <label>Bulan:</label>
-               <input type="text" name="bulan" class="form-control" placeholder="Masukan bulan" required />
+               <input type="text" readonly name="bulan" id="bulan" class="form-control" placeholder="Masukan bulan" required />
             </div>
             <div class="form-group">
                <label>Tahun:</label>
-               <input type="text" name="tahun" class="form-control" placeholder="Masukan tahun" required />
+               <input type="text" readonly name="tahun" id="tahun" class="form-control" placeholder="Masukan tahun" required />
             </div>
             <div class="form-group">
                <label>Kecepatan Angin:</label>
-               <input type="text" name="angin" class="form-control" placeholder="Masukan kecepatan angin" required />
+               <input type="text" readonly name="angin" id="angin" class="form-control" placeholder="Masukan kecepatan angin" required />
             </div>
             <div class="form-group">
                <label>Curah Hujan:</label>
-               <input type="text" name="hujan" class="form-control" placeholder="Masukan curah hujan" required />
+               <input type="text" readonly name="hujan" id="hujan" class="form-control" placeholder="Masukan curah hujan" required />
             </div>
             <div class="form-group">
                <label>Temperatur:</label>
-               <input type="text" name="temperatur" class="form-control" placeholder="Masukan temperatur" required />
+               <input type="text" readonly name="temperatur" id="temperatur" class="form-control" placeholder="Masukan temperatur" required />
             </div>
             <div class="form-group">
                <label>Kelembaban:</label>
-               <input type="text" name="lembab" class="form-control" placeholder="Masukan Kelembaban" required />
+               <input type="text" readonly name="lembab" id="lembab" class="form-control" placeholder="Masukan Kelembaban" required />
             </div>
+            <button type="button" id="current" name="current" class="btn btn-primary">Current Weather</button>
             <button type="submit" id="Submit" name="submit" class="btn btn-primary">Predict</button>
-      </form>
+         </form>
+      </div>
    </div>
-</div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+   integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+   $( "#current" ).click(function() {
+      $.ajax({
+         url: "http://api.weatherstack.com/current?access_key=28bc5614069cb90ba306b03d1172cb0c&query=Sleman",
+         cache: false,
+         success: function (html) {
+            var tanggal = html.location.localtime;
+            var bulan_str = tanggal.substring(5,7);
+            var tahun_str = tanggal.substring(0,4);
+            $("#angin").val(html.current.wind_speed);
+            $("#temperatur").val(html.current.temperature);
+            $("#lembab").val(html.current.humidity);
+            $("#hujan").val(html.current.precip);
+            $("#bulan").val(bulan_str);
+            $("#tahun").val(tahun_str);
+         }
+      });
+   });
+</script>
+
 </html>
